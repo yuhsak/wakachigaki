@@ -1,7 +1,7 @@
 {
   "name": "wakachigaki",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimal japanese sentence tokenizer written in 100% pure TypeScript.",
   "author": {
     "name": "Yuhsak Inoue",
     "email": "yuhsak.inoue@gmail.com",
