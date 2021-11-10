@@ -1,5 +1,5 @@
-import { getFeatures } from '../feature'
-import { predict } from '../predict'
+import { getFeatures } from './feature'
+import { predict } from './predict'
 
 export const tokenize = (text: string) => {
   return predict(getFeatures(text))
@@ -13,3 +13,5 @@ export const tokenize = (text: string) => {
     )
     .filter((c) => !!c)
 }
+
+export { tokenize as segment }
