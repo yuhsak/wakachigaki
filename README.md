@@ -1,12 +1,18 @@
 # wakachigaki
 
-## Install
+4.4Kbの軽量日本語分かち書きライブラリ
+
+## 紹介
+
+`wakachigaki` は辞書を使わない軽量の日本語分かち書き用ライブラリです。
+
+## インストール
 
 ```sh
 npm install wakachigaki
 ```
 
-## Usage
+## 使い方
 
 ```ts
 import { tokenize } from 'wakachigaki'

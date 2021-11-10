@@ -1,10 +1,173 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <meta charSet="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wakachigaki | わずか4.4Kbの日本語分かち書きライブラリ</title>
+    <link rel="stylesheet" href="./style/reset.css" />
+    <script type="module">
+      import { tokenize } from 'https://unpkg.com/wakachigaki@0.0.1/lib/esm/tokenize/tokenize.js'
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const source = document.querySelector('input.source')
+        const dist = document.querySelector('textarea.dist')
+
+        source.value = '非常に効果的な機械学習モデル'
+        dist.value = tokenize(source.value).join(' | ')
+
+        source.addEventListener('keyup', (e) => {
+          const { value } = e.target
+          const tokens = tokenize(value)
+          dist.value = tokens.join(' | ')
+        })
+      })
+    </script>
+    <style>
+      h1 {
+        font-size: 6rem;
+        font-weight: bold;
+      }
+
+      p,
+      span {
+        font-size: 1.5rem;
+      }
+
+      @media all and (min-width: 1024px) and (max-width: 1280px) {
+        h1 {
+          font-size: 5rem;
+        }
+
+        p,
+        span {
+          font-size: 1.25rem;
+        }
+      }
+
+      @media all and (min-width: 768px) and (max-width: 1024px) {
+        h1 {
+          font-size: 4rem;
+        }
+
+        p,
+        span {
+          font-size: 1rem;
+        }
+      }
+
+      @media all and (min-width: 480px) and (max-width: 768px) {
+        h1 {
+          font-size: 3rem;
+        }
+
+        p,
+        span {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media all and (max-width: 480px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        p,
+        span {
+          font-size: 0.8rem;
+        }
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2.5rem 1.5rem 2.5rem 1.5rem;
+      }
+
+      main > * {
+        margin-bottom: 2.5rem;
+      }
+
+      .title {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(90deg, #7928ca, #ff0080);
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+      }
+
+      .icons > * {
+        margin: 0 0.5rem 0 0.5rem;
+      }
+
+      a.card {
+        border-radius: 2px;
+        padding: 1rem;
+        transition: all 0.5s;
+      }
+
+      a.card:hover {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+      }
+
+      input.source {
+        width: 50%;
+        min-width: 240px;
+        padding: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      textarea {
+        width: 50%;
+        min-width: 240px;
+        padding: 0.5rem;
+        min-height: 10rem;
+      }
+
+      .stretch {
+        align-self: stretch;
+      }
+
+      .flex {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .center {
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>wakachigaki</h1>
+    <main>
+      <h1 class="title">
+        <a href="https://yuhsak.github.io/wakachigaki/">wakachigaki</a>
+      </h1>
+      <div class="flex center">
+        <p>わずか4.4Kbの日本語分かち書きライブラリ</p>
+        <div class="icons">
+          <a class="card" href="https://www.npmjs.com/package/wakachigaki"
+            ><img src="./image/npm.svg" width="48"
+          /></a>
+          <a class="card" href="https://github.com/yuhsak/wakachigaki"
+            ><img src="./image/github.png" width="24"
+          /></a>
+        </div>
+      </div>
+      <div class="stretch flex center">
+        <input
+          class="source"
+          type="text"
+          placeholder="分かち書きしたい文を入力"
+        />
+        <textarea class="dist" disabled></textarea>
+      </div>
+    </main>
   </body>
 </html>
