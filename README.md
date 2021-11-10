@@ -62,7 +62,7 @@ JSでアプリケーションを開発していると検索機能の実装など
 
 ## モデルの学習方法
 
-機械学習モデルを利用した分かち書きの学習方法を検討している際 [Tiny Segmenter](http://chasen.org/~taku/software/TinySegmenter/) がほぼ同様の構成になっているのを発見し多いに参考にさせて頂きました。
+機械学習モデルを利用した分かち書きの学習方法を検討している際 [Tiny Segmenter](http://chasen.org/~taku/software/TinySegmenter/) がほぼ同様の構成になっているのを発見し大いに参考にさせて頂きました。
 
 データの加工と学習にはPythonを使い、[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)を全量使ってモデルの学習を行っています。
 
