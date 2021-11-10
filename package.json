@@ -1,0 +1,50 @@
+{
+  "name": "wakachigaki",
+  "version": "0.0.1",
+  "description": "",
+  "author": {
+    "name": "Yuhsak Inoue",
+    "email": "yuhsak.inoue@gmail.com",
+    "url": "https://github.com/yuhsak"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuhsak/wakachigaki.git"
+  },
+  "main": "lib/common/index.js",
+  "types": "lib/types/index.d.ts",
+  "module": "lib/esm/index.js",
+  "files": [
+    "lib",
+    "src",
+    "!lib/**/*.tsbuildinfo",
+    "tsconfig.json",
+    "tsconfig.esm.json"
+  ],
+  "scripts": {
+    "clean:dist": "rimraf lib",
+    "clean:test": "rimraf coverage",
+    "clean": "run-p clean:*",
+    "check:tsc": "tsc --noEmit",
+    "check:perttier": "prettier --check .",
+    "test:jest": "jest",
+    "check": "run-s check:*",
+    "test": "run-p check:* test:*",
+    "build:watch": "npm run build -- --watch",
+    "build": "tsc -b tsconfig.json tsconfig.esm.json",
+    "prebuild": "run-p clean:dist",
+    "start": "npm run watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.2.107",
+    "@swc/jest": "^0.2.5",
+    "@types/jest": "^27.0.2",
+    "jest": "27.3.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.4"
+  }
+}
