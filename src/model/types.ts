@@ -80,6 +80,7 @@ export type Hash = number
 export type Type = string
 
 export type Model = {
+  version: string
   threshold: number
   bias: number
   weight: {

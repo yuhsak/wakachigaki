@@ -1,4 +1,4 @@
-import { ngram, range } from '../../src'
+import { ngram, range } from '../../src/util'
 
 describe('Ngram Functions', () => {
   describe('ngram', () => {

@@ -1,4 +1,4 @@
-import { getCharType } from '../../src/feature/char'
+import { getCharType } from '../../src/feature'
 
 describe('Char Functions', () => {
   test('getCharType', () => {

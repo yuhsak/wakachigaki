@@ -20,7 +20,7 @@
     "src",
     "!lib/**/*.tsbuildinfo",
     "tsconfig.json",
-    "tsconfig.esm.json"
+    "tsconfig.common.json"
   ],
   "scripts": {
     "clean:dist": "rimraf lib",
@@ -32,7 +32,7 @@
     "check": "run-s check:*",
     "test": "run-p check:* test:*",
     "build:watch": "npm run build -- --watch",
-    "build": "tsc -b tsconfig.json tsconfig.esm.json",
+    "build": "tsc -b tsconfig.json tsconfig.common.json",
     "prebuild": "run-p clean:dist",
     "start": "npm run watch",
     "prepublishOnly": "npm run build"

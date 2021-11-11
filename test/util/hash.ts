@@ -1,4 +1,4 @@
-import { cyclicShiftBy5, crcVariant, txt2hash } from '../../src'
+import { cyclicShiftBy5, crcVariant, txt2hash } from '../../src/util'
 
 describe('Hash Functions', () => {
   test('cyclicShiftBy5', () => {

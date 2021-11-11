@@ -1,4 +1,4 @@
-import { tokenize, segment } from '../../src'
+import { tokenize, segment } from '../../src/tokenize'
 
 describe('Tokenize Functions', () => {
   const tokens = tokenize('This is a Test')

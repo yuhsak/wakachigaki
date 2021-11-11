@@ -1,6 +1,7 @@
 import type { Model } from './types'
 
 export const model: Model = {
+  version: '1.0.0',
   threshold: 0.529,
   weight: {
     hash: {
