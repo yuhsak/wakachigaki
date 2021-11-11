@@ -16,7 +16,7 @@
 
 辞書を用いる [MeCab](https://taku910.github.io/mecab/) や [kuromoji.js](https://github.com/takuyaa/kuromoji.js/) などと異なり品詞の推定機能はありませんが、その分インストールも実行も軽量で環境を問わず動作します。
 
-[^1]: ブラウザ用にES Module形式のコードを配布していますが、パッケージ自体が厳密にNode.jsのNative ESMに対応しているわけではありません
+[^1]: ブラウザ用にES Module形式のコードを配布していますが、パッケージ自体が厳密にNode.jsのNative ESMに対応しているわけではありません。Node.jsでは従来通りCommonJS形式のパッケージとして読み込まれます。TypeScriptが正式にNative ESMに対応した段階でDual Package化する予定です。
 
 ## 使い方
 
