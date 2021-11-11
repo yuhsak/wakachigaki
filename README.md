@@ -10,7 +10,7 @@
 
 予め分かち書きされた大量の日本語テキストから作成した機械学習モデルを内包することで辞書不要の分かち書きを実現しています。
 
-ピュアなJavaScriptなのでNode.jsやブラウザなど環境を問わず動作するのが特徴で、TypeScriptやES Module [^1] にも対応しています。
+ピュアなJavaScriptなのでNode.jsやブラウザなど環境を問わず動作するのが特徴で、TypeScriptやES Module[^1]にも対応しています。
 
 学習には[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)全量を用いました。
 
