@@ -11,3 +11,4 @@ export {
   isAlphabet,
   features,
 } from './feature'
+export type { NgramFeature } from './feature'
