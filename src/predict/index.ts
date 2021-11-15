@@ -1,3 +1,3 @@
 export * from './types'
-export * from './probability'
+export * from './proba'
 export * from './predict'

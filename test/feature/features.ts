@@ -1,4 +1,4 @@
-import { getFeatures } from '../../src/feature'
+import { features } from '../../src/feature'
 
 const props = (t: string) =>
   ['U', 'B', 'T'].flatMap((n) =>
@@ -8,11 +8,11 @@ const props = (t: string) =>
   )
 
 describe('Features Functions', () => {
-  test('getFeatures', () => {
+  test('features', () => {
     const text = 'aあ0漢カ百bhjかいオ'
-    const features = getFeatures(text)
-    expect(features).toHaveLength(text.length)
-    const feature = features[0]
+    const feats = features(text)
+    expect(feats).toHaveLength(text.length)
+    const feature = feats[0]
     const { type, hash } = feature
     props('H').forEach((prop) => {
       expect(hash).toHaveProperty(prop)

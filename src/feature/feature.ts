@@ -15,7 +15,7 @@ const typeSources: FeatureSource[] = [
   ['TT', 5, 3],
 ]
 
-const getFeature =
+const feature =
   <T, R>(sources: FeatureSource[]) =>
   (fn: (pos: number, num: number) => T) => {
     return sources.reduce(
@@ -33,6 +33,6 @@ const getFeature =
     ) as R
   }
 
-export const getHashFeature = getFeature<number, NgramHashFeature>(hashSources)
+export const hashFeature = feature<number, NgramHashFeature>(hashSources)
 
-export const getTypeFeature = getFeature<string, NgramTypeFeature>(typeSources)
+export const typeFeature = feature<string, NgramTypeFeature>(typeSources)
