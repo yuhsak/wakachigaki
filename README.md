@@ -14,7 +14,9 @@
 
 学習には[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)全量を用いました。
 
-辞書を用いる [MeCab](https://taku910.github.io/mecab/) や [kuromoji.js](https://github.com/takuyaa/kuromoji.js/) などと異なり品詞の推定機能はありませんが、その分インストールも実行も軽量で環境を問わず動作します。
+[MeCab](https://taku910.github.io/mecab/) + [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd) で得られる分かち書き結果を約90%の精度で再現することが出来ています。
+
+辞書を用いる [kuromoji.js](https://github.com/takuyaa/kuromoji.js/) などと異なり品詞の推定機能はありませんが、その分インストールも実行も軽量で環境を問わず動作します。
 
 [^1]: ブラウザ用にES Module形式のコードを配布していますが、パッケージ自体が厳密にNode.jsのNative ESMに対応しているわけではありません。Node.jsでは従来通りCommonJS形式のパッケージとして読み込まれます。TypeScriptが正式にNative ESMに対応した段階でDual Package化する予定です。
 
@@ -38,15 +40,48 @@ tokenize('非常に効果的な機械学習モデル')
 // => [ '非常', 'に', '効果的', 'な', '機械学習', 'モデル' ]
 ```
 
+### ユーティリティ
+
+内部で文字種の判定に利用している正規表現と判定用の関数も利用可能です。
+
+正規表現の内容は [src/feature/regexp.ts](./src/feature/regexp.ts) を参照して下さい。
+
+```ts
+import { regexp, isHiragana, isKatakana, isKanji, isNumeralKanji, isAlphabet, isNumeral } from 'wakachigaki'
+
+/**
+ * 与えられた文字列が文字種判定用の正規表現を満たすかどうかチェックする関数。入力は複数文字でもOK
+ * 以下は全てtrueになる例
+ **/
+
+// ひらがな
+isHiragana('あ')
+
+// カタカナ
+isKatakana('カ')
+
+// 漢字
+isKanji('漢字')
+
+// 漢数字
+isNumeralKanji('一二三四五六七八九十百千万億兆')
+
+// アルファベット (半角, 全角を無視)
+isAlphabet('aａ')
+
+// 数字 (半角, 全角を無視)
+isNumeral('9９')
+```
+
 ### ブラウザ対応
 
-`wakachigaki` 自体では特にブラウザ用にビルドしたコードを配布していませんが、元々ES Module形式に対応しているため [unpkg.com](https://unpkg.com) などのCDNを経由すればすぐに動作させることが出来ます。
+`wakachigaki` 自体では特にブラウザ用にビルドしたコードを配布していませんが、元々他パッケージへの依存がなくES Module形式に対応しているため [unpkg.com](https://unpkg.com) などのCDNを経由すればすぐに動作させることが出来ます。
 
 下記のコードをhtmlに貼り付ければ多くのブラウザでそのまま動くはずです。
 
 ```html
 <script type="module">
-  import { tokenize } from 'https://unpkg.com/wakachigaki@1.0.0/lib/esm/tokenize.js'
+  import { tokenize } from 'https://unpkg.com/wakachigaki@1.1.3'
   console.log(tokenize('ブラウザで分かち書きのテスト'))
   // => [ 'ブラウザ', 'で', '分かち', '書き', 'の', 'テスト']
 </script>
@@ -54,7 +89,7 @@ tokenize('非常に効果的な機械学習モデル')
 
 ## 開発の動機
 
-JSでアプリケーションを開発していると検索機能の実装などで日本語の分かち書きを行いたい時があります。
+JSでアプリケーションを開発していると検索やレコメンド機能の実装などで日本語の分かち書きを行いたい時があります。
 
 そんな時に `npm install` したらサクっと使えてブラウザでも動いてESM, TypeScriptにも対応しているものがあれば嬉しいと思ったのが直接の動機です。
 
