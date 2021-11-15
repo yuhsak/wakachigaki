@@ -18,7 +18,7 @@ export const features = (text: string): NgramFeature[] => {
     ...['E', 'E', 'E', 'E', 'E', 'E'],
   ])
 
-  return chars.map((_, i) => {
+  return chars.map((char, i) => {
     const index = i + 6
     const ngramByCharsAt = ngramByChars(index)
     const ngramByTypesAt = ngramByTypes(index)
@@ -26,6 +26,6 @@ export const features = (text: string): NgramFeature[] => {
     const hash = hashFeature((pos, num) => txt2hash(ngramByCharsAt(pos, num)))
     const type = typeFeature(ngramByTypesAt)
 
-    return { hash, type }
+    return { char, hash, type }
   })
 }

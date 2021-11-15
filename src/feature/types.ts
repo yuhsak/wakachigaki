@@ -9,4 +9,8 @@ export type NgramHashFeature = Record<NgramHashWeightKey, Hash>
 
 export type NgramTypeFeature = Record<NgramTypeWeightKey, Type>
 
-export type NgramFeature = { hash: NgramHashFeature; type: NgramTypeFeature }
+export type NgramFeature = {
+  char: string
+  hash: NgramHashFeature
+  type: NgramTypeFeature
+}
