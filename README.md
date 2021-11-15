@@ -141,7 +141,7 @@ isNumeral('9９')
 
 ```html
 <script type="module">
-  import { tokenize } from 'https://unpkg.com/wakachigaki@1.2.3'
+  import { tokenize } from 'https://unpkg.com/wakachigaki@1.2.4'
   console.log(tokenize('ブラウザで分かち書きのテスト'))
   // => [ 'ブラウザ', 'で', '分かち', '書き', 'の', 'テスト']
 </script>
