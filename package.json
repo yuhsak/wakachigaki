@@ -19,7 +19,8 @@
     "lib",
     "src",
     "!lib/**/*.tsbuildinfo",
-    "tsconfig.json"
+    "tsconfig.json",
+    "tsconfig.cjs.json"
   ],
   "scripts": {
     "clean:dist": "rimraf lib",
@@ -31,11 +32,7 @@
     "check": "run-s check:*",
     "test": "run-p check:* test:*",
     "build:watch": "npm run build -- --watch",
-    "build:tsc": "tsc -b tsconfig.json",
-    "postbuild:tsc": "rimraf lib/cjs",
-    "build:cjs": "esbuild src/{,**/}*.ts --tree-shaking=true --sourcemap --allow-overwrite --minify --format=cjs --outdir=lib/cjs",
-    "build:esm": "esbuild src/{,**/}*.ts --tree-shaking=true --sourcemap --allow-overwrite --minify --format=esm --outdir=lib/esm",
-    "build": "run-s build:tsc build:cjs build:esm",
+    "build": "tsc -b tsconfig.json tsconfig.cjs.json",
     "prebuild": "run-p clean:dist",
     "start": "npm run watch",
     "prepublishOnly": "npm run build"
@@ -44,7 +41,6 @@
     "@swc/core": "^1.2.107",
     "@swc/jest": "^0.2.5",
     "@types/jest": "^27.0.2",
-    "esbuild": "^0.13.13",
     "jest": "27.3.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
