@@ -1,8 +1,9 @@
 import type { Model } from './types'
 
+export const threshold = 0.529
+
 export const model: Model = {
   version: '1.0.0',
-  threshold: 0.529,
   weight: {
     hash: {
       UH1: { '57': -47, '218': -67 },

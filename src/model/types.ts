@@ -81,7 +81,6 @@ export type Type = string
 
 export type Model = {
   version: string
-  threshold: number
   bias: number
   weight: {
     hash: Record<NgramHashWeightKey, Record<Hash, number>>

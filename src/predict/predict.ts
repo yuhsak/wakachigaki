@@ -1,12 +1,12 @@
 import type { NgramFeature } from '../feature'
-import { model } from '../model'
+import { threshold } from '../model'
 import { proba } from './proba'
 
 export const predictProba = (features: NgramFeature[]) => {
   return features.reduce(
     (acc, feature) => {
       const p = proba({ ...feature, distance: acc.distance })
-      const willBreak = p >= model.threshold
+      const willBreak = p >= threshold
       const distance = willBreak ? 0 : acc.distance + 1
       return { value: [...acc.value, p], distance }
     },
@@ -15,4 +15,4 @@ export const predictProba = (features: NgramFeature[]) => {
 }
 
 export const predict = (features: NgramFeature[]) =>
-  predictProba(features).map((p) => p >= model.threshold)
+  predictProba(features).map((p) => p >= threshold)
