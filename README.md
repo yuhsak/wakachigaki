@@ -40,6 +40,68 @@ tokenize('非常に効果的な機械学習モデル')
 // => [ '非常', 'に', '効果的', 'な', '機械学習', 'モデル' ]
 ```
 
+### 境界確率の取得
+
+分かち書きされた結果を直接取得するだけでなく、テキスト内の各文字についてその文字の直後に単語境界がある確率を0~1の範囲の数値で取得することが出来ます。
+
+```ts
+import { features, predictProba } from 'wakachigaki'
+
+// 特徴量を取得
+const feats = features('非常に効果的な機械学習モデル')
+
+predictProba(feats)
+/*
+=> [
+  0.04352163495527219,
+  0.9983674855549803,
+  0.9570985196432062,
+  0.020232997095785403,
+  0.4410257854815464,
+  0.9718047120298574,
+  0.9350510773272682,
+  0.053911107427991614,
+  0.4902512356245618,
+  0.10137858065530672,
+  0.6850331853722771,
+  0.003590023669711093,
+  0.005351566605225266,
+  0.9775552921668524
+]
+*/
+```
+
+`tokenize()` 関数は内部でこの数値が予め定義された閾値を超えているかどうかを判定の基準にしていて、閾値もまた `threshold` という変数でexportされています。
+
+```ts
+import { features, predictProba, predict, threshold } from 'wakachigaki'
+
+const feats = features('非常に効果的な機械学習モデル')
+
+const probas = predictProba(feats)
+
+// probas.map(p => p >= threshold) と同じ結果
+predict(feats)
+/*
+=> [
+  false,
+  true,
+  true,
+  false,
+  false,
+  true,
+  true,
+  false,
+  false,
+  false,
+  true,
+  false,
+  false,
+  true
+]
+*/
+```
+
 ### ユーティリティ
 
 内部で文字種の判定に利用している正規表現と判定用の関数も利用可能です。
@@ -81,7 +143,7 @@ isNumeral('9９')
 
 ```html
 <script type="module">
-  import { tokenize } from 'https://unpkg.com/wakachigaki@1.1.3'
+  import { tokenize } from 'https://unpkg.com/wakachigaki@1.2.0'
   console.log(tokenize('ブラウザで分かち書きのテスト'))
   // => [ 'ブラウザ', 'で', '分かち', '書き', 'の', 'テスト']
 </script>
