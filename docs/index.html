@@ -2,7 +2,10 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <title>wakachigaki | わずか4.4Kbの日本語分かち書きライブラリ</title>
     <link rel="stylesheet" href="./style/reset.css" />
     <script type="module">
@@ -11,15 +14,19 @@
       window.addEventListener('DOMContentLoaded', () => {
         const source = document.querySelector('input.source')
         const dist = document.querySelector('textarea.dist')
-
         source.value = '非常に効果的な機械学習モデル'
-        dist.value = tokenize(source.value).join(' | ')
 
-        source.addEventListener('keyup', (e) => {
+        const update = (e) => {
           const { value } = e.target
           const tokens = tokenize(value)
           dist.value = tokens.join(' | ')
-        })
+        }
+
+        update({ target: source })
+
+        source.addEventListener('keyup', update)
+        source.addEventListener('change', update)
+        source.addEventListener('blur', update)
       })
     </script>
     <style>
@@ -29,7 +36,9 @@
       }
 
       p,
-      span {
+      span,
+      input,
+      textarea {
         font-size: 1.5rem;
       }
 
@@ -39,7 +48,9 @@
         }
 
         p,
-        span {
+        span,
+        input,
+        textarea {
           font-size: 1.25rem;
         }
       }
@@ -50,7 +61,9 @@
         }
 
         p,
-        span {
+        span,
+        input,
+        textarea {
           font-size: 1rem;
         }
       }
@@ -61,7 +74,9 @@
         }
 
         p,
-        span {
+        span,
+        input,
+        textarea {
           font-size: 0.9rem;
         }
       }
@@ -72,7 +87,9 @@
         }
 
         p,
-        span {
+        span,
+        input,
+        textarea {
           font-size: 0.8rem;
         }
       }
@@ -92,7 +109,7 @@
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(90deg, #7928ca, #ff0080);
+        background-image: linear-gradient(135deg, #7928ca, #ff0080);
       }
 
       .icons {
@@ -117,17 +134,28 @@
       }
 
       input.source {
-        width: 50%;
-        min-width: 240px;
+        width: 100%;
+        max-width: 50rem;
         padding: 0.5rem;
         margin-bottom: 1.5rem;
       }
 
       textarea {
-        width: 50%;
-        min-width: 240px;
+        width: 100%;
+        max-width: 50rem;
         padding: 0.5rem;
         min-height: 10rem;
+      }
+
+      textarea:disabled {
+        color: inherit;
+        -webkit-text-fill-color: #000;
+        opacity: 0.75;
+        background-color: #fafafa;
+      }
+
+      main > .no-margin {
+        margin-bottom: 0;
       }
 
       .stretch {
@@ -166,7 +194,7 @@
           /></a>
         </div>
       </div>
-      <div class="stretch flex center">
+      <div class="stretch flex center no-margin">
         <input
           class="source"
           type="text"
