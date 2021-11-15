@@ -8,13 +8,11 @@
 
 `wakachigaki` は辞書を使わない軽量の日本語分かち書き用ライブラリです。
 
-予め分かち書きされた大量の日本語テキストから作成した機械学習モデルを内包することで辞書不要の分かち書きを実現しています。
-
 ピュアなJavaScriptなのでNode.jsやブラウザなど環境を問わず動作するのが特徴で、TypeScriptやES Module[^1]にも対応しています。
 
-学習には[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)全量を用いました。
+予め分かち書きされた大量の日本語テキストから作成した機械学習モデルを内包することで辞書不要の分かち書きを実現しています。
 
-[MeCab](https://taku910.github.io/mecab/) + [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd) で得られる分かち書き結果を約90%の精度で再現することが出来ています。
+学習には[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)全量を用いました。[MeCab](https://taku910.github.io/mecab/) + [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd) で得られる分かち書き結果を約90%の精度で再現することが出来ています。
 
 辞書を用いる [kuromoji.js](https://github.com/takuyaa/kuromoji.js/) などと異なり品詞の推定機能はありませんが、その分インストールも実行も軽量で環境を問わず動作します。
 
