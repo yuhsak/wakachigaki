@@ -8,11 +8,13 @@
 
 `wakachigaki` は辞書を使わない軽量の日本語分かち書き用ライブラリです。
 
-ピュアなJavaScriptなのでNode.jsやブラウザなど環境を問わず動作するのが特徴で、TypeScriptやES Module[^1]にも対応しています。
+ピュアなJavaScriptなのでNode.jsやDeno, ブラウザなど環境を問わず動作するのが特徴で、TypeScriptやES Module[^1]にも対応しています。
 
 予め分かち書きされた大量の日本語テキストから作成した機械学習モデルを内包することで辞書不要の分かち書きを実現しています。
 
 学習には[Wikipedia日本語版のダンプデータ](https://dumps.wikimedia.org/jawiki/)全量を用いました。[MeCab](https://taku910.github.io/mecab/) + [mecab-ipadic-NEologd](https://github.com/neologd/mecab-ipadic-neologd) で得られる分かち書き結果を約90%の精度で再現することが出来ています。
+
+単語境界の判定には文中に出現する文字の種類や並び順の情報のみを用いるようになっており、単語単位で固有の情報を一切利用していないため未知語に非常に強いのが特徴です。
 
 辞書を用いる [kuromoji.js](https://github.com/takuyaa/kuromoji.js/) などと異なり品詞の推定機能はありませんが、その分インストールも実行も軽量で環境を問わず動作します。
 
@@ -145,6 +147,19 @@ isNumeral('9９')
   console.log(tokenize('ブラウザで分かち書きのテスト'))
   // => [ 'ブラウザ', 'で', '分かち', '書き', 'の', 'テスト']
 </script>
+```
+
+### Deno
+
+`wakachigaki` はNode.js固有のAPIを使用していないためDeno環境でも動作します。
+
+ブラウザ同様にCDNとしてunpkgを利用することも出来ますが、TypeScriptの型定義の配布に対応した [Skypack](https://www.skypack.dev) を利用するのがおすすめです。
+
+```ts
+import { tokenize } from 'https://cdn.skypack.dev/wakachigaki@1.2.5?dts'
+
+console.log(tokenize('Denoで分かち書きのテスト'))
+// => ['Deno', 'で', '分かち', '書き', 'の', 'テスト']
 ```
 
 ## 開発の動機
