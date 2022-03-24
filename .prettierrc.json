@@ -8,5 +8,15 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "useTabs": false
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": ["*.md", "README"],
+      "options": { "parser": "markdown-nocjsp" }
+    },
+    {
+      "files": ["*.mdx"],
+      "options": { "parser": "mdx-nocjsp" }
+    }
+  ]
 }

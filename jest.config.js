@@ -16,5 +16,6 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'babel',
+  coverageReporters: ['clover', 'json', 'lcov', 'text', 'json-summary'],
   verbose: true,
 }
