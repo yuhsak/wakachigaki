@@ -5,7 +5,7 @@
 ![](./badges/badge-functions.svg)
 ![](./badges/badge-lines.svg)
 
-4.4Kbの軽量日本語分かち書きライブラリ
+6.2Kbの軽量日本語分かち書きライブラリ
 
 [動作確認用のデモサイト](https://yuhsak.github.io/wakachigaki/)
 
