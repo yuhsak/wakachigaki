@@ -36,9 +36,10 @@ export const featurer = (nBuckets: number, size: number, offset: number) => {
   const h = hash(nBuckets)
 
   return (text: string) => {
-    const chars = [...text.normalize().toLowerCase()]
+    const source = text.normalize()
+    const chars = [...source]
 
-    const ngramByChars = ngram([...prefix, ...chars, ...suffix])
+    const ngramByChars = ngram([...prefix, ...source.toLowerCase(), ...suffix])
     const ngramByTypes = ngram([
       ...prefix,
       ...chars.map(getCharType),
