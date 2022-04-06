@@ -1,18 +1,35 @@
 import type { NgramFeature } from '../feature'
-import { threshold as t } from '../model'
+import { threshold as t, model, Weight } from '../model'
 import { proba } from './proba'
 
-export const predictProba = (features: NgramFeature[], treshold = t) => {
-  return features.reduce(
-    (acc, feature) => {
-      const p = proba({ ...feature, distance: acc.distance })
-      const willBreak = p >= treshold
-      const distance = willBreak ? 0 : acc.distance + 1
-      return { value: [...acc.value, p], distance }
-    },
-    { value: [], distance: 0 } as { value: number[]; distance: number },
-  ).value
+const {
+  weight,
+  config: { scale },
+} = model
+
+export const probaPredictor = (weight: Weight, scale: number) => {
+  const p = proba(weight, scale)
+
+  return (features: NgramFeature[], threshold = 0.5) => {
+    return features.reduce<{ value: number[]; distance: number }>(
+      (acc, feature) => {
+        const _p = p({ ...feature, distance: acc.distance })
+        const willBreak = _p > threshold
+        const distance = willBreak ? 0 : acc.distance + 1
+        return { value: [...acc.value, _p], distance }
+      },
+      { value: [], distance: 0 },
+    ).value
+  }
 }
 
-export const predict = (features: NgramFeature[], threshold = t) =>
-  predictProba(features, threshold).map((p) => p >= threshold)
+export const predictProba = probaPredictor(weight, scale)
+
+export const predictor = (weight: Weight, scale: number) => {
+  const predictProba = probaPredictor(weight, scale)
+
+  return (features: NgramFeature[], threshold = t) =>
+    predictProba(features, threshold).map((p) => p > threshold)
+}
+
+export const predict = predictor(weight, scale)

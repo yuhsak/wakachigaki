@@ -1,24 +1,17 @@
-import { features } from '../../src/feature'
+import { featurer } from '../../src/feature'
 
-const props = (t: string) =>
-  ['U', 'B', 'T'].flatMap((n) =>
-    [...Array(n === 'U' ? 13 : n === 'B' ? 12 : 11).keys()].map(
-      (k) => `${n}${t}${k + 1}`,
-    ),
-  )
-
-describe('Features Functions', () => {
+describe('feature functions', () => {
   test('features', () => {
     const text = 'aあ0漢カ百bhjかいオ'
-    const feats = features(text)
+    const feats = featurer(262144, 3, 3)(text)
     expect(feats).toHaveLength(text.length)
-    const feature = feats[0]
-    const { type, hash } = feature
-    props('H').forEach((prop) => {
-      expect(hash).toHaveProperty(prop)
-    })
-    props('T').forEach((prop) => {
-      expect(type).toHaveProperty(prop)
-    })
+    feats.forEach((f) =>
+      f.features.forEach((f) => {
+        expect(['type', 'hash'].includes(f.kind)).toEqual(true)
+        expect(typeof f.size).toEqual('number')
+        expect(typeof f.offset).toEqual('number')
+        expect(typeof f.value).toEqual('string')
+      }),
+    )
   })
 })

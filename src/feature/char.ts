@@ -1,25 +1,16 @@
-import type { Type } from '../model'
 import * as R from './regexp'
 
 const rules = [
   {
     fn: R.isKanji,
-    rep: 'J',
+    rep: 'C',
   },
   { fn: R.isNumeralKanji, rep: 'S' },
   { fn: R.isHiragana, rep: 'H' },
   { fn: R.isKatakana, rep: 'K' },
-  { fn: R.isAlphabet, rep: 'R' },
+  { fn: R.isAlphabet, rep: 'A' },
   { fn: R.isNumeral, rep: 'N' },
 ]
 
-export const getCharType = (char: string): Type => {
-  let i = rules.length
-  while (i--) {
-    const rule = rules[i]!
-    if (rule.fn(char)) {
-      return rule.rep
-    }
-  }
-  return 'O'
-}
+export const getCharType = (char: string) =>
+  rules.reduce((rep, rule) => (rule.fn(char) ? rule.rep : rep), 'O')

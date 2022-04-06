@@ -1,23 +1,17 @@
-import type { NgramHashFeature, NgramTypeFeature } from '../feature'
 import type { NgramFeatureWithDistance } from './types'
-import { model } from '../model'
+import { Weight } from '../model'
+import { sigmoid } from '../util'
 
-export const proba = (feature: NgramFeatureWithDistance) => {
-  const bias = model.bias / 1000
+export const proba = (weight: Weight, scale: number) => {
+  const { bias } = weight
 
-  const hash =
-    (Object.keys(feature.hash) as (keyof NgramHashFeature)[]).reduce(
-      (score, key) => score + (model.weight.hash[key][feature.hash[key]] || 0),
-      0,
-    ) / 1000
+  return (feature: NgramFeatureWithDistance) => {
+    const features = feature.features.reduce<number>((score, f) => {
+      return score + (weight[f.kind][f.size]?.[f.offset]?.[f.value] || 0)
+    }, 0)
 
-  const type =
-    (Object.keys(feature.type) as (keyof NgramTypeFeature)[]).reduce(
-      (score, key) => score + (model.weight.type[key][feature.type[key]] || 0),
-      0,
-    ) / 1000
+    const distance = feature.distance * weight.distance
 
-  const distance = (model.weight.distance / 1000) * feature.distance
-
-  return 1 / (1 + Math.exp(-1 * (bias + hash + type + distance)))
+    return sigmoid((bias + features + distance) / scale)
+  }
 }
