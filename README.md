@@ -156,7 +156,7 @@ isNumeral('9９')
 
 ```html
 <script type="module">
-  import { tokenize } from 'https://unpkg.com/wakachigaki@1.3.1'
+  import { tokenize } from 'https://unpkg.com/wakachigaki@1.3.2'
   console.log(tokenize('ブラウザで分かち書きのテスト'))
   // => [ 'ブラウザ', 'で', '分かち', '書き', 'の', 'テスト']
 </script>
@@ -169,7 +169,7 @@ isNumeral('9９')
 ブラウザ同様にCDNとしてunpkgを利用することも出来ますが、TypeScriptの型定義の配布に対応した [Skypack](https://www.skypack.dev) を利用するのがおすすめです。
 
 ```ts
-import { tokenize } from 'https://cdn.skypack.dev/wakachigaki@1.3.1?dts'
+import { tokenize } from 'https://cdn.skypack.dev/wakachigaki@1.3.2?dts'
 
 console.log(tokenize('Denoで分かち書きのテスト'))
 // => ['Deno', 'で', '分かち', '書き', 'の', 'テスト']
