@@ -9,6 +9,8 @@
 
 [動作確認用のデモサイト](https://yuhsak.github.io/wakachigaki/)
 
+Python版は[こちら](https://github.com/yuhsak/wakachigaki-py)
+
 ## 紹介
 
 `wakachigaki` は辞書を使わない軽量の日本語分かち書き用ライブラリです。
