@@ -10,6 +10,7 @@ export {
   isAlphabet,
   features,
 } from './feature'
+export { crc32, hash } from './hash'
 export { threshold, model } from './model'
 export { ngram, sigmoid } from './util'
 export type { NgramFeature } from './feature'
